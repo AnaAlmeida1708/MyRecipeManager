@@ -1,6 +1,12 @@
 package br.com.myrecipemanager.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Ingredient implements Serializable {
 
@@ -8,6 +14,10 @@ public class Ingredient implements Serializable {
 	
 	private Integer code;
 	private String name;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="code_ingredient")
+	private Set<DetailsRecipeIngredients> detailsRecipeIngredients = new HashSet<>();
 	
 	public Ingredient() {
 	}
@@ -32,6 +42,14 @@ public class Ingredient implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<DetailsRecipeIngredients> getDetailsRecipeIngredients() {
+		return detailsRecipeIngredients;
+	}
+
+	public void setDetailsRecipeIngredients(Set<DetailsRecipeIngredients> detailsRecipeIngredients) {
+		this.detailsRecipeIngredients = detailsRecipeIngredients;
 	}
 
 	@Override

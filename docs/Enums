@@ -1,0 +1,22 @@
+--tabela tipo
+insert into tipo (tipo)
+values('Salgada');
+insert into tipo (tipo)
+values('Doce');
+
+--tabela tipo preparo
+insert into tipo_preparo (ds_tp_preparo) values('Fogão');
+insert into tipo_preparo (ds_tp_preparo) values('Forno');
+insert into tipo_preparo (ds_tp_preparo) values('Fogão e Forno');
+insert into tipo_preparo (ds_tp_preparo) values('Geladeira');
+insert into tipo_preparo (ds_tp_preparo) values('Freezer');
+insert into tipo_preparo (ds_tp_preparo) values('Outro');
+
+--tabela categoria
+insert into categoria (ds_categoria) values ('Bebidas');
+insert into categoria (ds_categoria) values ('Doces e Sobremesas');
+insert into categoria (ds_categoria) values ('Pães, Bolos, Tortas e Lanches diversos');
+insert into categoria (ds_categoria) values ('Acompanhamentos, Saladas e Molhos');
+insert into categoria (ds_categoria) values ('Carnes, Aves, Peixes, Etc');
+insert into categoria (ds_categoria) values ('Sopas');
+insert into categoria (ds_categoria) values ('Pratos únicos ou Principal');

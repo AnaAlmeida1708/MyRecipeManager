@@ -1,4 +1,4 @@
-package br.com.myrecipemanager.controller;
+package br.com.myrecipemanager.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +10,6 @@ public class RecipeController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String listar() {
-	return "REST está funcionando!";
+	return "Testando o REST";
 	}
 }

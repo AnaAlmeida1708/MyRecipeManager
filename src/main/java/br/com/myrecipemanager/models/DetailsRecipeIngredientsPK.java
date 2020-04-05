@@ -2,19 +2,21 @@ package br.com.myrecipemanager.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@Embeddable
 public class DetailsRecipeIngredientsPK implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
-	@JoinColumn(name="recipe_id")
+	@JoinColumn(name="recipe_code")
 	private Recipe recipe;
 	
 	@ManyToOne
-	@JoinColumn(name="ingredient_id")
+	@JoinColumn(name="ingredient_code")
 	private Ingredient ingredient;
 
 	public Recipe getRecipe() {

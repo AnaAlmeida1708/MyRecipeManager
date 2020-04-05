@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,26 +14,16 @@ public class DetailsRecipeIngredients implements Serializable {
 	
 	@JsonIgnore
 	@EmbeddedId
-	private DetailsRecipeIngredientsPK id = new DetailsRecipeIngredientsPK();
+	private DetailsRecipeIngredientsPK code = new DetailsRecipeIngredientsPK();
 	private String quantidade;
-	
-	@ManyToOne
-	@JoinColumn(name="recipe_code")
-	private Recipe recipe;
-	
-	@ManyToOne
-	@JoinColumn(name="ingredient_code")
-	private Ingredient ingredient;
 	 
 	public DetailsRecipeIngredients () {
 	}
 
 	public DetailsRecipeIngredients(String quantidade, Recipe recipe, Ingredient ingredient) {
-		id.setRecipe(recipe);
-		id.setIngredient(ingredient);
+		code.setRecipe(recipe);
+		code.setIngredient(ingredient);
 		this.quantidade = quantidade;
-		this.recipe = recipe;
-		this.ingredient = ingredient;
 	}
 	
 
@@ -49,34 +37,33 @@ public class DetailsRecipeIngredients implements Serializable {
 	
 	@JsonIgnore
 	public Recipe getRecipe() {
-		return id.getRecipe();
+		return code.getRecipe();
 	}
 
 	public void setRecipe(Recipe recipe) {
-		id.setRecipe(recipe);
+		code.setRecipe(recipe);
 	}
 
 	public Ingredient getIngredient() {
-		return id.getIngredient();
+		return code.getIngredient();
 	}
 
 	public void setIngredient(Ingredient ingredient) {
-		id.setIngredient(ingredient);
+		code.setIngredient(ingredient);
 	}
 
-	public DetailsRecipeIngredientsPK getId() {
-		return id;
+	public DetailsRecipeIngredientsPK getCode() {
+		return code;
 	}
 
-	public void setId(DetailsRecipeIngredientsPK id) {
-		this.id = id;
+	public void setCode(DetailsRecipeIngredientsPK code) {
+		this.code = code;
 	}
 
 	@Override
 	public String toString() {
-		return "DetailsRecipeIngredients [" + (quantidade != null ? "quantidade=" + quantidade + ", " : "")
-				+ (recipe != null ? "recipe=" + recipe + ", " : "")
-				+ (ingredient != null ? "ingredient=" + ingredient : "") + "]";
+		return "DetailsRecipeIngredients [" + (code != null ? "code=" + code + ", " : "")
+				+ (quantidade != null ? "quantidade=" + quantidade : "") + "]";
 	}
 	
 	

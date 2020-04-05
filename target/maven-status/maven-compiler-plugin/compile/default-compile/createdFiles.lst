@@ -1,0 +1,13 @@
+br\com\myrecipemanager\services\DBService.class
+br\com\myrecipemanager\models\Ingredient.class
+br\com\myrecipemanager\controllers\RecipeController.class
+br\com\myrecipemanager\controllers\TypeController.class
+br\com\myrecipemanager\models\DetailsRecipeIngredientsPK.class
+br\com\myrecipemanager\config\Config.class
+br\com\myrecipemanager\models\Category.class
+br\com\myrecipemanager\models\PrepareType.class
+br\com\myrecipemanager\MyRecipeManagerApplication.class
+br\com\myrecipemanager\repositories\TypeRepository.class
+br\com\myrecipemanager\models\Type.class
+br\com\myrecipemanager\models\DetailsRecipeIngredients.class
+br\com\myrecipemanager\models\Recipe.class

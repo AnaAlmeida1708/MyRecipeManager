@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.myrecipemanager.models.Category;
+import br.com.myrecipemanager.models.Ingredient;
 import br.com.myrecipemanager.models.PrepareType;
 import br.com.myrecipemanager.models.Type;
 import br.com.myrecipemanager.repositories.CategoryRepository;
+import br.com.myrecipemanager.repositories.IngredientRepository;
 import br.com.myrecipemanager.repositories.PrepareTypeRepository;
 import br.com.myrecipemanager.repositories.TypeRepository;
 
@@ -22,7 +24,8 @@ public class DBService {
 	private PrepareTypeRepository prepareTypeRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
+	@Autowired
+	private IngredientRepository ingredientRepository;
 	
 	public void instantiateTestDataBase() throws ParseException {
 		
@@ -45,6 +48,20 @@ public class DBService {
 		Category cat5 = new Category(null, "Carnes, Aves, Peixes, Etc");
 		Category cat6 = new Category(null, "Pratos únicos ou Principal");
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6));
+		
+		Ingredient ing1 = new Ingredient(null, "ovos");
+		Ingredient ing2 = new Ingredient(null, "couve");
+		Ingredient ing3 = new Ingredient(null, "tomate cereja");
+		Ingredient ing4 = new Ingredient(null, "pimentão verde");
+		Ingredient ing5 = new Ingredient(null, "sal");
+		Ingredient ing6 = new Ingredient(null, "queijo ralado");
+		Ingredient ing7 = new Ingredient(null, "azeite");
+		Ingredient ing8 = new Ingredient(null, "manjericão");
+		Ingredient ing9 = new Ingredient(null, "pimenta do reino");
+		ingredientRepository.saveAll(Arrays.asList(ing1, ing2, ing3, ing4, ing5, ing6,
+				ing7, ing8, ing9));
+		
+		//pensar em como é a lógica do Details Ingredientes
 		
 	}
 

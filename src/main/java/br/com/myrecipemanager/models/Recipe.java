@@ -25,6 +25,7 @@ public class Recipe implements Serializable {
 	private String methodOfPreparation;
 	private String preparationTime;
 	private String comments;
+	private Boolean favorite;
 	
 	@ManyToOne
 	@JoinColumn(name="category_code")//pode ser que aqui seja id ao invés de code, ver e se for o caso trocar
@@ -45,7 +46,7 @@ public class Recipe implements Serializable {
 	}
 
 	public Recipe(Integer code, String name, String tested, String methodOfPreparation, String preparationTime,
-			String comments, Category category, Type type, PrepareType prepareType) {
+			String comments, Category category, Type type, PrepareType prepareType, Boolean favorite) {
 		this.code = code;
 		this.name = name;
 		this.tested = tested;
@@ -55,6 +56,7 @@ public class Recipe implements Serializable {
 		this.category = category;
 		this.type = type;
 		this.prepareType = prepareType;
+		this.favorite = favorite;
 	}
 
 	public Integer getCode() {
@@ -136,6 +138,14 @@ public class Recipe implements Serializable {
 	public void setDetailsRecipeIngredients(Set<DetailsRecipeIngredients> detailsRecipeIngredients) {
 		this.detailsRecipeIngredients = detailsRecipeIngredients;
 	}
+	
+	public Boolean getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(Boolean favorite) {
+		this.favorite = favorite;
+	}
 
 	@Override
 	public String toString() {
@@ -144,8 +154,12 @@ public class Recipe implements Serializable {
 				+ (methodOfPreparation != null ? "methodOfPreparation=" + methodOfPreparation + ", " : "")
 				+ (preparationTime != null ? "preparationTime=" + preparationTime + ", " : "")
 				+ (comments != null ? "comments=" + comments + ", " : "")
+				+ (favorite != null ? "favorite=" + favorite + ", " : "")
 				+ (category != null ? "category=" + category + ", " : "") + (type != null ? "type=" + type + ", " : "")
-				+ (prepareType != null ? "prepareType=" + prepareType : "") + "]";
+				+ (prepareType != null ? "prepareType=" + prepareType + ", " : "")
+				+ (detailsRecipeIngredients != null ? "detailsRecipeIngredients=" + detailsRecipeIngredients : "")
+				+ "]";
 	}
+
 	
 }

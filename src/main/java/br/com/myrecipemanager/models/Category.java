@@ -51,10 +51,10 @@ public class Category implements Serializable {
 		this.description = description;
 	}
 
-	@Override
-	public String toString() {
-		return "Categoria [" + (code != null ? "code=" + code + ", " : "")
-				+ (description != null ? "description=" + description : "") + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Categoria [" + (code != null ? "code=" + code + ", " : "")
+//				+ (description != null ? "description=" + description : "") + "]";
+//	}
 	
 }

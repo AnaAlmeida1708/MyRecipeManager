@@ -42,9 +42,21 @@ public class IngredientService {
 	}
 	
 	@Transactional
+	public List<Ingredient> insertAll (List<Ingredient> ingredients) {
+		for (Ingredient ingredient : ingredients) {
+			insert(ingredient);
+		}
+		return ingredients;
+	}
+	
+	@Transactional
 	public Ingredient update (Ingredient ingredient) {
-		Ingredient newIngredient = find(ingredient.getCode());
-		updateData(newIngredient, ingredient);
+		Ingredient newIngredient = repo.findByName(ingredient.getName());
+		if(newIngredient != null) {
+			return newIngredient;
+		}
+		Ingredient newIngredient2 = find(ingredient.getCode());
+		updateData(newIngredient2, ingredient);
 		return repo.save(ingredient);
 	}
 

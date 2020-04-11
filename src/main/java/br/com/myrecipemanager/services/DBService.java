@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.myrecipemanager.models.Category;
+import br.com.myrecipemanager.models.DetailsRecipeIngredients;
 import br.com.myrecipemanager.models.Ingredient;
 import br.com.myrecipemanager.models.PrepareType;
+import br.com.myrecipemanager.models.Recipe;
 import br.com.myrecipemanager.models.Type;
 import br.com.myrecipemanager.repositories.CategoryRepository;
+import br.com.myrecipemanager.repositories.DetailsRecipeIngredientsRepository;
 import br.com.myrecipemanager.repositories.IngredientRepository;
 import br.com.myrecipemanager.repositories.PrepareTypeRepository;
+import br.com.myrecipemanager.repositories.RecipeRepository;
 import br.com.myrecipemanager.repositories.TypeRepository;
 
 @Service
@@ -26,6 +30,10 @@ public class DBService {
 	private CategoryRepository categoryRepository;
 	@Autowired
 	private IngredientRepository ingredientRepository;
+	@Autowired
+	private RecipeRepository recipeRepository;
+	@Autowired
+	private DetailsRecipeIngredientsRepository detailsRepository;
 	
 	public void instantiateTestDataBase() throws ParseException {
 		
@@ -60,8 +68,26 @@ public class DBService {
 		Ingredient ing9 = new Ingredient(null, "pimenta do reino");
 		ingredientRepository.saveAll(Arrays.asList(ing1, ing2, ing3, ing4, ing5, ing6,
 				ing7, ing8, ing9));
+	
 		
-		//pensar em como é a lógica do Details Ingredientes
+		Recipe recipe = new Recipe(null, "Pãozinho", "sim", 
+				"buscar na Padaria", "10 minutos", "", 
+				cat3, typeS, prep6, true);
+		
+		recipeRepository.saveAll(Arrays.asList(recipe));
+		
+		DetailsRecipeIngredients details = new DetailsRecipeIngredients("2", recipe, ing1);
+		DetailsRecipeIngredients details2 = new DetailsRecipeIngredients("2 xic", recipe, ing6);
+		DetailsRecipeIngredients details3 = new DetailsRecipeIngredients("1", recipe, ing4);
+		
+		recipe.getDetailsRecipeIngredients().addAll(Arrays.asList(details, details2, details3));
+		
+		ing1.getDetailsRecipeIngredients().addAll(Arrays.asList(details));
+		ing6.getDetailsRecipeIngredients().addAll(Arrays.asList(details2));
+		ing4.getDetailsRecipeIngredients().addAll(Arrays.asList(details3));
+		
+		detailsRepository.saveAll(Arrays.asList(details, details2, details3));
+
 		
 	}
 

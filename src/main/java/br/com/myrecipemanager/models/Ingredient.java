@@ -28,6 +28,7 @@ public class Ingredient implements Serializable {
 	@OneToMany(mappedBy="code.ingredient")
 	private Set<DetailsRecipeIngredients> detailsRecipeIngredients = new HashSet<>();
 	
+	@JsonIgnore
 	public List<Recipe> getRecipe() {
 		List<Recipe> list = new ArrayList<>();
 		for (DetailsRecipeIngredients x : detailsRecipeIngredients) {
@@ -69,11 +70,11 @@ public class Ingredient implements Serializable {
 		this.detailsRecipeIngredients = detailsRecipeIngredients;
 	}
 
-	@Override
-	public String toString() {
-		return "Ingredient [" + (code != null ? "code=" + code + ", " : "") + (name != null ? "name=" + name : "")
-				+ "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Ingredient [" + (code != null ? "code=" + code + ", " : "") + (name != null ? "name=" + name : "")
+//				+ "]";
+//	}
 	
 
 }

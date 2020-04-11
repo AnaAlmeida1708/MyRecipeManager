@@ -51,10 +51,10 @@ public class PrepareType implements Serializable {
 		this.prepareType = prepareType;
 	}
 
-	@Override
-	public String toString() {
-		return "TipoPreparo [" + (code != null ? "code=" + code + ", " : "")
-				+ (prepareType != null ? "prepareType=" + prepareType : "") + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "TipoPreparo [" + (code != null ? "code=" + code + ", " : "")
+//				+ (prepareType != null ? "prepareType=" + prepareType : "") + "]";
+//	}
 	
 }

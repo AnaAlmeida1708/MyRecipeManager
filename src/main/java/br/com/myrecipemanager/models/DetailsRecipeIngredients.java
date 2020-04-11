@@ -15,24 +15,24 @@ public class DetailsRecipeIngredients implements Serializable {
 	@JsonIgnore
 	@EmbeddedId
 	private DetailsRecipeIngredientsPK code = new DetailsRecipeIngredientsPK();
-	private String quantidade;
+	private String quantity;
 	 
 	public DetailsRecipeIngredients () {
 	}
 
-	public DetailsRecipeIngredients(String quantidade, Recipe recipe, Ingredient ingredient) {
+	public DetailsRecipeIngredients(String quantity, Recipe recipe, Ingredient ingredient) {
 		code.setRecipe(recipe);
 		code.setIngredient(ingredient);
-		this.quantidade = quantidade;
+		this.quantity = quantity;
 	}
 	
 
-	public String getQuantidade() {
-		return quantidade;
+	public String getQuantity() {
+		return quantity;
 	}
 
-	public void setQuantidade(String quantidade) {
-		this.quantidade = quantidade;
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
 	}
 	
 	@JsonIgnore
@@ -63,7 +63,7 @@ public class DetailsRecipeIngredients implements Serializable {
 	@Override
 	public String toString() {
 		return "DetailsRecipeIngredients [" + (code != null ? "code=" + code + ", " : "")
-				+ (quantidade != null ? "quantidade=" + quantidade : "") + "]";
+				+ (quantity != null ? "quantidade=" + quantity : "") + "]";
 	}
 	
 	

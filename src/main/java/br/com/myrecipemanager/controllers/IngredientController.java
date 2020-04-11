@@ -1,6 +1,7 @@
 package br.com.myrecipemanager.controllers;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,17 @@ public class IngredientController {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{code}").buildAndExpand(ingredient.getCode()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="{/list}",method = RequestMethod.POST)
+	public ResponseEntity<Void> insertAll (@Valid @RequestBody List<IngredientNewDTO> objDtos){
+		List<Ingredient>listIngred = new ArrayList<>();
+		for (IngredientNewDTO ingredient : objDtos) {
+			Ingredient ingred = service.fromDTO(ingredient);
+			listIngred.add(ingred);
+		}
+		service.insertAll(listIngred);
+		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value="{code}",method=RequestMethod.PUT)

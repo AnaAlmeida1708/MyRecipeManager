@@ -51,9 +51,9 @@ public class Type implements Serializable {
 		this.type = type;
 	}
 
-	@Override
-	public String toString() {
-		return "Tipo [" + (code != null ? "code=" + code + ", " : "") + (type != null ? "type=" + type : "") + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Tipo [" + (code != null ? "code=" + code + ", " : "") + (type != null ? "type=" + type : "") + "]";
+//	}
 
 }

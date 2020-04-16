@@ -21,7 +21,7 @@ public class Recipe implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer code;
 	private String name;
-	private String tested;
+	private Boolean tested;
 	private String methodOfPreparation;
 	private String preparationTime;
 	private String comments;
@@ -45,7 +45,7 @@ public class Recipe implements Serializable {
 	public Recipe() {
 	}
 
-	public Recipe(Integer code, String name, String tested, String methodOfPreparation, String preparationTime,
+	public Recipe(Integer code, String name, Boolean tested, String methodOfPreparation, String preparationTime,
 			String comments, Category category, Type type, PrepareType prepareType, Boolean favorite) {
 		this.code = code;
 		this.name = name;
@@ -75,11 +75,11 @@ public class Recipe implements Serializable {
 		this.name = name;
 	}
 
-	public String getTested() {
+	public Boolean getTested() {
 		return tested;
 	}
 
-	public void setTested(String tested) {
+	public void setTested(Boolean tested) {
 		this.tested = tested;
 	}
 

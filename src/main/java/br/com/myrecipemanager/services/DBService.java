@@ -70,7 +70,7 @@ public class DBService {
 				ing7, ing8, ing9));
 	
 		
-		Recipe recipe = new Recipe(null, "Pãozinho", "sim", 
+		Recipe recipe = new Recipe(null, "Pãozinho", true, 
 				"buscar na Padaria", "10 minutos", "", 
 				cat3, typeS, prep6, true);
 		

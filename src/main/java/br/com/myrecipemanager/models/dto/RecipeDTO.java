@@ -13,7 +13,7 @@ public class RecipeDTO implements Serializable{
 	private Integer code;
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String name;
-	private String tested;
+	private Boolean tested;
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String methodOfPreparation;
 	private String preparationTime;
@@ -49,11 +49,11 @@ public class RecipeDTO implements Serializable{
 		this.name = name;
 	}
 
-	public String getTested() {
+	public Boolean getTested() {
 		return tested;
 	}
 
-	public void setTested(String tested) {
+	public void setTested(Boolean tested) {
 		this.tested = tested;
 	}
 

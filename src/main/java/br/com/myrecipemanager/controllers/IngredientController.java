@@ -50,7 +50,7 @@ public class IngredientController {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@RequestMapping(value="{/list}",method = RequestMethod.POST)
+	@RequestMapping(value="/list",method = RequestMethod.POST)
 	public ResponseEntity<Void> insertAll (@Valid @RequestBody List<IngredientNewDTO> objDtos){
 		List<Ingredient>listIngred = new ArrayList<>();
 		for (IngredientNewDTO ingredient : objDtos) {

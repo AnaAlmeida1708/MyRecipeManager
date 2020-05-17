@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.myrecipemanager.models.DetailsRecipeIngredients;
 import br.com.myrecipemanager.models.Recipe;
+import br.com.myrecipemanager.models.dto.RecipeDTO;
 import br.com.myrecipemanager.repositories.DetailsRecipeIngredientsRepository;
+import br.com.myrecipemanager.repositories.RecipeDAO;
 import br.com.myrecipemanager.repositories.RecipeRepository;
 import br.com.myrecipemanager.services.exceptions.ObjectNotFoundException;
 
@@ -19,6 +21,12 @@ public class RecipeService {
 
 	@Autowired
 	private RecipeRepository repo;
+	
+	@Autowired
+	private RecipeDAO dao;
+	
+	@Autowired
+	private DetailsRecipeIngredientsService detailsService;
 	
 	@Autowired
 	private IngredientService ingredientService;
@@ -35,10 +43,10 @@ public class RecipeService {
 	@Autowired
 	private PrepareTypeService prepareTypeService;
 
-	public Recipe find (Integer id) {
-		Optional<Recipe> recipe = repo.findById(id);
+	public Recipe find (Integer code) {
+		Optional<Recipe> recipe = repo.findById(code);
 		return recipe.orElseThrow(()-> new ObjectNotFoundException(
-				"Objeto não encontrado Id: " + id + ", Tipo: " + Recipe.class.getName()));
+				"Objeto não encontrado Code: " + code + ", Tipo: " + Recipe.class.getName()));
 	}
 
 	public List<Recipe> findAll() {
@@ -58,33 +66,54 @@ public class RecipeService {
 			detailsRecipeIngredient.setRecipe(recipe);
 		}
 		detailsRepository.saveAll(recipe.getDetailsRecipeIngredients());
-		System.out.println(recipe);
 		return recipe;
 		
 	}
 	
+	public List<Recipe> findRecipesByFilters(Integer typeCode, Integer categoryCode, Integer prepareTypeCode,
+			String preparationTime, String name, Boolean tested, Boolean favorite, String comments, String ingredient){
+		
+		return dao.findRecipesByFilters(typeCode, categoryCode, prepareTypeCode, preparationTime, name, 
+				tested, favorite, comments, ingredient);
+	}
+	
+	@Transactional
+	public void delete (Integer code) {
+		detailsService.deleteDetailsIngredients(code);
+		dao.deleteRecipe(code);
+	}
+	
 
-//	@Transactional
-//	public Recipe update(Recipe recipe) {
-//		Recipe newRecipe = find(recipe.getCode());
-//		updateData(newRecipe, recipe);
-//		return repo.save(newRecipe);
-//	}
-//
-//	private void updateData(Recipe newRecipe, Recipe recipe) {
-//		newRecipe.setName(recipe.getName());
-//		newRecipe.setTested(recipe.getTested());
-//		newRecipe.setMethodOfPreparation(recipe.getMethodOfPreparation());
-//		newRecipe.setPreparationTime(recipe.getPreparationTime());
-//		newRecipe.setComments(recipe.getComments());
-//		newRecipe.setFavorite(recipe.getFavorite());
-//	}
-//
-//	public Recipe fromDTO (RecipeDTO recipeDto) {
-//		return new Recipe(recipeDto.getCode(), recipeDto.getName(), recipeDto.getTested(), recipeDto.getMethodOfPreparation(), 
-//				recipeDto.getPreparationTime(), recipeDto.getComments(), null, null, null, recipeDto.getFavorite());
-//	}
-//
+	@Transactional
+	public Recipe update(Recipe recipe) {
+		Recipe newRecipe = find(recipe.getCode());
+		updateData(newRecipe, recipe);
+		return repo.save(newRecipe);
+	}
+
+	private void updateData(Recipe newRecipe, Recipe recipe) {
+		newRecipe.setName(recipe.getName());
+		newRecipe.setTested(recipe.getTested());
+		newRecipe.setMethodOfPreparation(recipe.getMethodOfPreparation());
+		newRecipe.setPreparationTime(recipe.getPreparationTime());
+		newRecipe.setComments(recipe.getComments());
+		newRecipe.setFavorite(recipe.getFavorite());
+		newRecipe.setCategory(recipe.getCategory());
+		newRecipe.setType(recipe.getType());
+		newRecipe.setPrepareType(recipe.getPrepareType());
+	}
+
+	public Recipe fromDTOupdate (RecipeDTO recipeDto) {
+		Recipe recipe = new Recipe();
+		recipe.setCategory(categoryService.find(recipeDto.getCodeCategory()));
+		recipe.setType(typeService.find(recipeDto.getCodeType()));
+		recipe.setPrepareType(prepareTypeService.find(recipeDto.getCodePrepareType()));
+		return new Recipe(recipeDto.getCode(), recipeDto.getName(), recipeDto.getTested(), recipeDto.getMethodOfPreparation(), 
+				recipeDto.getPreparationTime(), recipeDto.getComments(), recipe.getCategory(), 
+				recipe.getType(), recipe.getPrepareType(), recipeDto.getFavorite());
+	}
+
+//	NOVO OBJETO
 //	public Recipe fromDTO (RecipeNewDTO recipeDto) {
 //		Type type = new Type(recipeDto.getTypeCode(), null);
 //		Category category = new Category(recipeDto.getCategoryCode(), null);

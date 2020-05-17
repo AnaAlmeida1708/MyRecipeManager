@@ -72,5 +72,14 @@ public class IngredientService {
 		Ingredient ingredient = new Ingredient(null, ingredientDto.getName());
 		return ingredient;
 	}
-
+	
+//	public void delete (Integer code) {
+//	try {
+//		repo.deleteById(code);
+//		detailsRepository.de
+//	} catch (DataIntegrityViolationException e) {
+//		throw new DataIntegrityViolationException("Não é possível excluir por que há receitas relacionadas");
+//	}
+//}
+	
 }

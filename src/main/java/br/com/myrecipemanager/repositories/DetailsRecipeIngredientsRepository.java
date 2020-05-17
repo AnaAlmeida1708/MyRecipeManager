@@ -8,4 +8,10 @@ import br.com.myrecipemanager.models.DetailsRecipeIngredients;
 @Repository
 public interface DetailsRecipeIngredientsRepository extends JpaRepository<DetailsRecipeIngredients, Integer> {
 	
+//	@Modifying
+//	@Query("DELETE FROM DETAILS_RECIPE_INGREDIENTS D WHERE D.RECIPE_CODE = :recipeCode ")
+//	void deleteByRecipeCode(@Param("recipeCode")Integer recipeCode);
+
+	//	public Integer deleteByRecipeCode(Integer recipeCode);
+	
 }

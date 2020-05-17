@@ -3,3 +3,5 @@
 bin/*
 .project
 /bin/
+target/*
+.mvn/*

@@ -20,11 +20,15 @@ public class RecipeDTO implements Serializable{
 	private String comments;
 	private Boolean favorite;
 	
+	private Integer codeCategory;
+	private Integer codeType;
+	private Integer codePrepareType;
+	
 	public RecipeDTO () {
 	}
 
 	public RecipeDTO(Recipe recipe) {
-		code = recipe.getCode();
+		setCode (recipe.getCode());
 		name = recipe.getName();
 		tested = recipe.getTested();
 		methodOfPreparation = recipe.getMethodOfPreparation();
@@ -87,6 +91,30 @@ public class RecipeDTO implements Serializable{
 
 	public void setFavorite(Boolean favorite) {
 		this.favorite = favorite;
+	}
+
+	public Integer getCodeCategory() {
+		return codeCategory;
+	}
+
+	public void setCodeCategory(Integer codeCategory) {
+		this.codeCategory = codeCategory;
+	}
+
+	public Integer getCodeType() {
+		return codeType;
+	}
+
+	public void setCodeType(Integer codeType) {
+		this.codeType = codeType;
+	}
+
+	public Integer getCodePrepareType() {
+		return codePrepareType;
+	}
+
+	public void setCodePrepareType(Integer codePrepareType) {
+		this.codePrepareType = codePrepareType;
 	}
 	
 

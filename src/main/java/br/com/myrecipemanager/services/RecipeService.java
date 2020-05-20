@@ -55,6 +55,10 @@ public class RecipeService {
 		return repo.findAll();
 	}
 	
+	public List<Recipe> findRecipesFavorite() {
+		return repo.findRecipesFavorite();
+	}
+	
 	@Transactional
 	public Recipe insert(Recipe recipe) {
 		recipe.setCode(null);

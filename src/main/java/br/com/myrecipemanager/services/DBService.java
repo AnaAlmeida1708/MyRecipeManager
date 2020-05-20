@@ -80,7 +80,7 @@ public class DBService {
 		
 		Recipe recipe3 = new Recipe(null, "Bolo", true, 
 				"buscar na Padaria", "10 minutos", "", 
-				cat4, typeS, prep6, true);
+				cat4, typeS, prep6, false);
 		
 		Recipe recipe4 = new Recipe(null, "Pizza", true, 
 				"buscar na Padaria", "10 minutos", "", 

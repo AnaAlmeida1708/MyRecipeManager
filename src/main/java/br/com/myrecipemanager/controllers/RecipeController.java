@@ -43,6 +43,12 @@ public class RecipeController {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@GetMapping("/favoritas")
+	public ResponseEntity<List<Recipe>> findRecipesFavorite() {
+		List<Recipe> list = service.findRecipesFavorite();
+		return ResponseEntity.ok().body(list);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert (@Valid @RequestBody Recipe recipe){
 		recipe = service.insert(recipe);
@@ -84,7 +90,7 @@ public class RecipeController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping("/busca-aleatoria")
+	@GetMapping("/aleatoria")
 	public ResponseEntity<Recipe> randomSearchRecipe(@RequestParam(value="categoryCode", required = false) Integer categoryCode){
 		Recipe recipe = service.randomSearchRecipe(categoryCode);
 		return ResponseEntity.ok().body(recipe);

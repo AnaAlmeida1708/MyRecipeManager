@@ -136,15 +136,5 @@ public class RecipeService {
 		}
 	}
 	
-	
-//	NOVO OBJETO
-//	public Recipe fromDTO (RecipeNewDTO recipeDto) {
-//		Type type = new Type(recipeDto.getTypeCode(), null);
-//		Category category = new Category(recipeDto.getCategoryCode(), null);
-//		PrepareType prepareType = new PrepareType(recipeDto.getPrepareTypeCode(), null);
-//		Recipe recipe = new Recipe (null, recipeDto.getName(), recipeDto.getTested(), recipeDto.getMethodOfPreparation(), 
-//				recipeDto.getPreparationTime(), recipeDto.getComments(), category, type, prepareType, recipeDto.getFavorite());
-//		return recipe;
-//	}
 
 }

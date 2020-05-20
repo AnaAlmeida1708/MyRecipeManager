@@ -68,6 +68,7 @@ public class RecipeController {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@Transactional
 	@DeleteMapping(value="{code}")
 	public ResponseEntity<Void> delete(@PathVariable Integer code) {
 		service.delete(code);
@@ -81,6 +82,12 @@ public class RecipeController {
 		recipe.setCode(code);
 		recipe = service.update(recipe);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/busca-aleatoria")
+	public ResponseEntity<Recipe> randomSearchRecipe(@RequestParam(value="categoryCode", required = false) Integer categoryCode){
+		Recipe recipe = service.randomSearchRecipe(categoryCode);
+		return ResponseEntity.ok().body(recipe);
 	}
 	
 }

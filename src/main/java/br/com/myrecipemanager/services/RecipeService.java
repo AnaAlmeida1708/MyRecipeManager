@@ -1,5 +1,6 @@
 package br.com.myrecipemanager.services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.myrecipemanager.models.Category;
 import br.com.myrecipemanager.models.DetailsRecipeIngredients;
 import br.com.myrecipemanager.models.Recipe;
 import br.com.myrecipemanager.models.dto.RecipeDTO;
@@ -112,7 +114,25 @@ public class RecipeService {
 				recipeDto.getPreparationTime(), recipeDto.getComments(), recipe.getCategory(), 
 				recipe.getType(), recipe.getPrepareType(), recipeDto.getFavorite());
 	}
-
+	
+	public Integer randomSearch(List<Integer> codeList) {
+		Collections.shuffle(codeList);
+		return codeList.get(0);
+	}
+	
+	public Recipe randomSearchRecipe(Integer categoryCode) {
+		List<Integer> codeList = dao.findCodeRecipesByCategory(categoryCode);
+		Integer code = null;
+		if(codeList != null) {
+			code = randomSearch(codeList);
+		Recipe recipe = find(code);
+		return recipe;
+		} else {
+			throw new ObjectNotFoundException("Categoria não encontrada :" + categoryCode + Category.class.getName());
+		}
+	}
+	
+	
 //	NOVO OBJETO
 //	public Recipe fromDTO (RecipeNewDTO recipeDto) {
 //		Type type = new Type(recipeDto.getTypeCode(), null);

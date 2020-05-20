@@ -85,5 +85,18 @@ public class RecipeDAO {
 		jdbcTemplate.update(sql.toString(), param);
 	}
 	
-
+	public List<Integer> findCodeRecipesByCategory(Integer categoryCode){
+		StringBuilder sql = new StringBuilder();
+		MapSqlParameterSource param = new MapSqlParameterSource();
+		sql.append(" SELECT CODE FROM RECIPE WHERE 1=1 ");
+		
+		if(categoryCode != null) {
+			sql.append(" AND CATEGORY_CODE = :categoryCode ");
+			param.addValue("categoryCode", categoryCode);
+		}
+		List<Integer> query = jdbcTemplate.queryForList(sql.toString(), param, Integer.class);
+		
+		return query;
+	}
+	
 }

@@ -97,7 +97,11 @@ public class RecipeController {
 		return ResponseEntity.ok().body(recipe);
 	}
 	
-
+	@GetMapping("/tempo-preparo")
+	public ResponseEntity<List<String>> preparationTime(){
+		List<String> list = service.preparationTime();
+		return ResponseEntity.ok().body(list);
+	}
 	
 	
 }

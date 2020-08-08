@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,9 @@ public class RecipeDAO {
 	
 	@Autowired
 	NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	JdbcTemplate jdbc;
 	
 	public List<Recipe> findRecipesByFilters(Integer typeCode, Integer categoryCode, Integer prepareTypeCode,
 			String preparationTime, String name, Boolean tested, Boolean favorite, String comments, String ingredient) {
@@ -44,7 +48,7 @@ public class RecipeDAO {
 			params.addValue("prepareTypeCode", prepareTypeCode);
 			} 
 		if (StringUtils.isNoneBlank(preparationTime)) { 
-			sql.append(" AND R.PREPARATION_TIME= :preparationTime "); 
+			sql.append(" AND R.= :preparationTime "); 
 			params.addValue("preparationTime", "%" + preparationTime + "%"); 
 			}
 		if (StringUtils.isNoneBlank(name)) { 
@@ -95,6 +99,15 @@ public class RecipeDAO {
 			param.addValue("categoryCode", categoryCode);
 		}
 		List<Integer> query = jdbcTemplate.queryForList(sql.toString(), param, Integer.class);
+		
+		return query;
+	}
+	
+	public List<String> preparationTime(){
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT R.PREPARATION_TIME FROM RECIPE AS R ");
+		
+		List<String> query = jdbc.queryForList(sql.toString(), String.class);
 		
 		return query;
 	}

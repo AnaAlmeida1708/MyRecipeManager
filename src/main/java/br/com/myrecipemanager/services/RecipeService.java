@@ -1,8 +1,11 @@
 package br.com.myrecipemanager.services;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -134,6 +137,19 @@ public class RecipeService {
 		} else {
 			throw new ObjectNotFoundException("Categoria não encontrada :" + categoryCode + Category.class.getName());
 		}
+	}
+	
+	public List<String> preparationTime(){
+		Set<String> set = new HashSet<>();
+		List<String> list = dao.preparationTime();
+		for (String l : list) {
+			set.add(l);
+		}
+		List<String> newList = new ArrayList<String>();
+		for (String s : set) {
+			newList.add(s);
+		}
+		return newList;
 	}
 	
 

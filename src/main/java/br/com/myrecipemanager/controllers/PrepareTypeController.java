@@ -12,7 +12,7 @@ import br.com.myrecipemanager.models.PrepareType;
 import br.com.myrecipemanager.services.PrepareTypeService;
 
 @RestController
-@RequestMapping(value = "/tipo-preparo")
+@RequestMapping(value = "/tipos-preparo")
 public class PrepareTypeController {
 	
 	@Autowired

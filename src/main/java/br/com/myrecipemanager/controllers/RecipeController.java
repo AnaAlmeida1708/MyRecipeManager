@@ -30,6 +30,7 @@ public class RecipeController {
 	@Autowired
 	private RecipeService service;
 	
+	
 	@RequestMapping(value="{code}",method=RequestMethod.GET)
 	public ResponseEntity<Recipe> find(@PathVariable Integer code) {
 		Recipe obj = service.find(code);
@@ -95,5 +96,8 @@ public class RecipeController {
 		Recipe recipe = service.randomSearchRecipe(categoryCode);
 		return ResponseEntity.ok().body(recipe);
 	}
+	
+
+	
 	
 }

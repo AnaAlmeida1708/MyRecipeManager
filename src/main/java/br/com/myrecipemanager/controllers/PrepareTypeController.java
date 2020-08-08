@@ -8,19 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.myrecipemanager.models.Type;
-import br.com.myrecipemanager.services.TypeService;
+import br.com.myrecipemanager.models.PrepareType;
+import br.com.myrecipemanager.services.PrepareTypeService;
 
 @RestController
-@RequestMapping(value = "/tipos")
-public class TypeController {
+@RequestMapping(value = "/tipo-preparo")
+public class PrepareTypeController {
 	
 	@Autowired
-	private TypeService typeService;
-		
+	private PrepareTypeService service;
+	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Type>> findAll() {
-		List<Type> list = typeService.findAll();
+	public ResponseEntity<List<PrepareType>> findAll(){
+		List<PrepareType> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
+
 }

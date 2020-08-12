@@ -22,14 +22,17 @@ public class RecipeRowMapper extends BeanPropertyRowMapper<Recipe>{
 		
 		Type type = new Type();
 		type.setCode(rs.getInt("type_code"));
+		type.setType(rs.getString("T_TYPE"));
 		recipe.setType(type);
 		
 		Category category = new Category();
 		category.setCode(rs.getInt("category_code"));
+		category.setDescription(rs.getString("C_DESCRIPTION"));
 		recipe.setCategory(category);
 		
 		PrepareType prepareType = new PrepareType();
 		prepareType.setCode(rs.getInt("prepare_type_code"));
+		prepareType.setPrepareType(rs.getString("PT_PREPARE_TYPE"));
 		recipe.setPrepareType(prepareType);
 		
 		return recipe;

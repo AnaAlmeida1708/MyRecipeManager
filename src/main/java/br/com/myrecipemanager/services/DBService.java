@@ -70,25 +70,25 @@ public class DBService {
 				ing7, ing8, ing9));
 	
 		
-		Recipe recipe = new Recipe(null, "Pãozinho", true, 
+		Recipe recipe = new Recipe(null, "Pãozinho", false, 
 				"buscar na Padaria", "10 minutos", "", 
 				cat3, typeS, prep6, true);
 		
-		Recipe recipe2 = new Recipe(null, "Pão", true, 
+		Recipe recipe2 = new Recipe(null, "Pão", false, 
 				"buscar na Padaria", "20 minutos", "", 
-				cat5, typeS, prep6, true);
+				cat5, typeS, prep6, false);
 		
-		Recipe recipe3 = new Recipe(null, "Bolo", true, 
+		Recipe recipe3 = new Recipe(null, "Bolo", false, 
 				"buscar na Padaria", "30 minutos", "", 
 				cat4, typeD, prep6, false);
 		
-		Recipe recipe4 = new Recipe(null, "Pizza", true, 
+		Recipe recipe4 = new Recipe(null, "Pizza", false, 
 				"buscar na Padaria", "10 minutos", "", 
-				cat6, typeS, prep6, true);
+				cat6, typeS, prep6, false);
 		
 		Recipe recipe5 = new Recipe(null, "Torta", true, 
 				"buscar na Padaria", "10 minutos", "", 
-				cat2, typeD, prep6, true);
+				cat2, typeD, prep6, false);
 		
 		recipeRepository.saveAll(Arrays.asList(recipe, recipe2, recipe3, recipe4, recipe5));
 		

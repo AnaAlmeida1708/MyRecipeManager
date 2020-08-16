@@ -25,7 +25,8 @@ public class RecipeDAO {
 			String preparationTime, String name, Boolean tested, Boolean favorite, String comments, String ingredient) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" SELECT R.CODE, R.COMMENTS, R.FAVORITE, R.NAME, R.TESTED, R.METHOD_OF_PREPARATION, R.PREPARATION_TIME, ")
-			.append(" R.CATEGORY_CODE, C.DESCRIPTION AS C_DESCRIPTION, R.PREPARE_TYPE_CODE, PT.PREPARE_TYPE AS PT_PREPARE_TYPE, R.TYPE_CODE, T.TYPE AS T_TYPE FROM RECIPE as R ")
+			.append(" R.CATEGORY_CODE, C.DESCRIPTION AS C_DESCRIPTION, R.PREPARE_TYPE_CODE, PT.PREPARE_TYPE AS PT_PREPARE_TYPE, ")
+			.append(" R.TYPE_CODE, T.TYPE AS T_TYPE, FROM RECIPE as R ")
 			.append(" LEFT JOIN TYPE AS T ON R.TYPE_CODE = T.CODE ")
 			.append(" LEFT JOIN CATEGORY AS C ON R.CATEGORY_CODE = C.CODE ")
 			.append(" LEFT JOIN PREPARE_TYPE AS PT ON R.PREPARE_TYPE_CODE = PT.CODE ")
@@ -111,5 +112,5 @@ public class RecipeDAO {
 		
 		return query;
 	}
-
+	
 }

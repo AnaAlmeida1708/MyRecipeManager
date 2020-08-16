@@ -81,9 +81,15 @@ public class RecipeService {
 	
 	public List<Recipe> findRecipesByFilters(Integer typeCode, Integer categoryCode, Integer prepareTypeCode,
 			String preparationTime, String name, Boolean tested, Boolean favorite, String comments, String ingredient){
-		
-		return dao.findRecipesByFilters(typeCode, categoryCode, prepareTypeCode, preparationTime, name, 
+		List<Recipe> listRecipes = dao.findRecipesByFilters(typeCode, categoryCode, prepareTypeCode, preparationTime, name, 
 				tested, favorite, comments, ingredient);
+		for (Recipe recipe : listRecipes) {
+			List<DetailsRecipeIngredients> listDetails = detailsService.findDetailsByRecipe(recipe.getCode());
+			Set<DetailsRecipeIngredients> details = new HashSet(listDetails);
+			recipe.setDetailsRecipeIngredients(details);
+		}
+		
+		return listRecipes;
 	}
 	
 	@Transactional

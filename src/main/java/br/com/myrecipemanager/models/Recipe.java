@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -22,6 +24,7 @@ public class Recipe implements Serializable {
 	private Integer code;
 	private String name;
 	private Boolean tested;
+	@Lob
 	private String methodOfPreparation;
 	private String preparationTime;
 	private String comments;

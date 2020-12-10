@@ -49,7 +49,7 @@ public class RecipeDAO {
 			params.addValue("prepareTypeCode", prepareTypeCode);
 			} 
 		if (StringUtils.isNoneBlank(preparationTime)) { 
-			sql.append(" AND R.= :preparationTime "); 
+			sql.append(" AND R.PREPARATION_TIME LIKE :preparationTime "); 
 			params.addValue("preparationTime", "%" + preparationTime + "%"); 
 			}
 		if (StringUtils.isNoneBlank(name)) { 

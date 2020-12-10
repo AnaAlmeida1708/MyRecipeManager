@@ -84,11 +84,13 @@ public class RecipeService {
 		List<Recipe> listRecipes = dao.findRecipesByFilters(typeCode, categoryCode, prepareTypeCode, preparationTime, name, 
 				tested, favorite, comments, ingredient);
 		for (Recipe recipe : listRecipes) {
+			System.out.println(recipe);
+		}
+		for (Recipe recipe : listRecipes) {
 			List<DetailsRecipeIngredients> listDetails = detailsService.findDetailsByRecipe(recipe.getCode());
-			Set<DetailsRecipeIngredients> details = new HashSet(listDetails);
+			Set<DetailsRecipeIngredients> details = new HashSet<DetailsRecipeIngredients>(listDetails);
 			recipe.setDetailsRecipeIngredients(details);
 		}
-		
 		return listRecipes;
 	}
 	

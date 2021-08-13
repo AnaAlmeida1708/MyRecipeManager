@@ -24,14 +24,12 @@ public class RecipeDAO {
 	public List<Recipe> findRecipesByFilters(Integer typeCode, Integer categoryCode, Integer prepareTypeCode,
 			String preparationTime, String name, Boolean tested, Boolean favorite, String comments, String ingredient) {
 		StringBuilder sql = new StringBuilder();
-		sql.append(" SELECT R.CODE, R.COMMENTS, R.FAVORITE, R.NAME, R.TESTED, R.METHOD_OF_PREPARATION, R.PREPARATION_TIME, ")
+		sql.append(" SELECT R.CODE, R.COMMENTS, R.FAVORITE, R.NAME, R.TESTED, R.METHOD_OF_PREPARATION, R.PREPARATION_TIME, R.INGREDIENTS, ")
 			.append(" R.CATEGORY_CODE, C.DESCRIPTION AS C_DESCRIPTION, R.PREPARE_TYPE_CODE, PT.PREPARE_TYPE AS PT_PREPARE_TYPE, ")
 			.append(" R.TYPE_CODE, T.TYPE AS T_TYPE, FROM RECIPE as R ")
 			.append(" LEFT JOIN TYPE AS T ON R.TYPE_CODE = T.CODE ")
 			.append(" LEFT JOIN CATEGORY AS C ON R.CATEGORY_CODE = C.CODE ")
 			.append(" LEFT JOIN PREPARE_TYPE AS PT ON R.PREPARE_TYPE_CODE = PT.CODE ")
-			.append(" LEFT JOIN DETAILS_RECIPE_INGREDIENTS AS DRI ON R.CODE = DRI.RECIPE_CODE ")
-			.append(" LEFT JOIN INGREDIENT AS I ON I.CODE = DRI.INGREDIENT_CODE ")
 			.append(" WHERE 1 = 1 ");
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
@@ -69,7 +67,7 @@ public class RecipeDAO {
 			params.addValue("comments", "%" + comments + "%"); 
 			} 
 		if (StringUtils.isNoneBlank(ingredient)) { 
-			sql.append(" and I.NAME LIKE :ingredient "); 
+			sql.append(" and R.INGREDIENTS LIKE :ingredient "); 
 			params.addValue("ingredient", "%" + ingredient + "%"); 
 			} 
 

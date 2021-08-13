@@ -1,10 +1,7 @@
 package br.com.myrecipemanager.models;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Recipe implements Serializable {
@@ -24,6 +20,8 @@ public class Recipe implements Serializable {
 	private Integer code;
 	private String name;
 	private Boolean tested;
+	@Lob
+	private String ingredients;
 	@Lob
 	private String methodOfPreparation;
 	private String preparationTime;
@@ -42,13 +40,10 @@ public class Recipe implements Serializable {
 	@JoinColumn(name="prepareType_code")
 	private PrepareType prepareType;
 	
-	@OneToMany(mappedBy = "code.recipe")
-	private Set<DetailsRecipeIngredients> detailsRecipeIngredients = new HashSet<>();
-	
 	public Recipe() {
 	}
 
-	public Recipe(Integer code, String name, Boolean tested, String methodOfPreparation, String preparationTime,
+	public Recipe(Integer code, String name, Boolean tested, String methodOfPreparation, String preparationTime, String ingredients,
 			String comments, Category category, Type type, PrepareType prepareType, Boolean favorite) {
 		this.code = code;
 		this.name = name;
@@ -60,6 +55,7 @@ public class Recipe implements Serializable {
 		this.type = type;
 		this.prepareType = prepareType;
 		this.favorite = favorite;
+		this.ingredients = ingredients;
 	}
 
 	public Integer getCode() {
@@ -133,15 +129,15 @@ public class Recipe implements Serializable {
 	public void setPrepareType(PrepareType prepareType) {
 		this.prepareType = prepareType;
 	}
-
-	public Set<DetailsRecipeIngredients> getDetailsRecipeIngredients() {
-		return detailsRecipeIngredients;
-	}
-
-	public void setDetailsRecipeIngredients(Set<DetailsRecipeIngredients> detailsRecipeIngredients) {
-		this.detailsRecipeIngredients = detailsRecipeIngredients;
-	}
 	
+	public String getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(String ingredients) {
+		this.ingredients = ingredients;
+	}
+
 	public Boolean getFavorite() {
 		return favorite;
 	}
@@ -154,15 +150,13 @@ public class Recipe implements Serializable {
 	public String toString() {
 		return "Recipe [" + (code != null ? "code=" + code + ", " : "") + (name != null ? "name=" + name + ", " : "")
 				+ (tested != null ? "tested=" + tested + ", " : "")
+				+ (ingredients != null ? "ingredients=" + ingredients + ", " : "")
 				+ (methodOfPreparation != null ? "methodOfPreparation=" + methodOfPreparation + ", " : "")
 				+ (preparationTime != null ? "preparationTime=" + preparationTime + ", " : "")
 				+ (comments != null ? "comments=" + comments + ", " : "")
 				+ (favorite != null ? "favorite=" + favorite + ", " : "")
 				+ (category != null ? "category=" + category + ", " : "") + (type != null ? "type=" + type + ", " : "")
-				+ (prepareType != null ? "prepareType=" + prepareType + ", " : "")
-				+ (detailsRecipeIngredients != null ? "detailsRecipeIngredients=" + detailsRecipeIngredients : "")
-				+ "]";
+				+ (prepareType != null ? "prepareType=" + prepareType : "") + "]";
 	}
-
 	
 }

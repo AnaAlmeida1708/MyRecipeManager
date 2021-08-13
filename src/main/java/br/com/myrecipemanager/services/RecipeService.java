@@ -13,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.myrecipemanager.models.Category;
-import br.com.myrecipemanager.models.DetailsRecipeIngredients;
 import br.com.myrecipemanager.models.Recipe;
 import br.com.myrecipemanager.models.dto.RecipeDTO;
-import br.com.myrecipemanager.repositories.DetailsRecipeIngredientsRepository;
 import br.com.myrecipemanager.repositories.RecipeDAO;
 import br.com.myrecipemanager.repositories.RecipeRepository;
 import br.com.myrecipemanager.services.exceptions.ObjectNotFoundException;
@@ -29,15 +27,6 @@ public class RecipeService {
 	
 	@Autowired
 	private RecipeDAO dao;
-	
-	@Autowired
-	private DetailsRecipeIngredientsService detailsService;
-	
-	@Autowired
-	private IngredientService ingredientService;
-	
-	@Autowired
-	private DetailsRecipeIngredientsRepository detailsRepository;
 	
 	@Autowired
 	private CategoryService categoryService;
@@ -69,12 +58,7 @@ public class RecipeService {
 		recipe.setType(typeService.find(recipe.getType().getCode()));
 		recipe.setPrepareType(prepareTypeService.find(recipe.getPrepareType().getCode()));
 		recipe = repo.save(recipe);
-		for(DetailsRecipeIngredients detailsRecipeIngredient : recipe.getDetailsRecipeIngredients()) {
-			detailsRecipeIngredient.setQuantity(detailsRecipeIngredient.getQuantity());
-			detailsRecipeIngredient.setIngredient(ingredientService.find(detailsRecipeIngredient.getIngredient().getCode()));
-			detailsRecipeIngredient.setRecipe(recipe);
-		}
-		detailsRepository.saveAll(recipe.getDetailsRecipeIngredients());
+
 		return recipe;
 		
 	}
@@ -86,17 +70,11 @@ public class RecipeService {
 		for (Recipe recipe : listRecipes) {
 			System.out.println(recipe);
 		}
-		for (Recipe recipe : listRecipes) {
-			List<DetailsRecipeIngredients> listDetails = detailsService.findDetailsByRecipe(recipe.getCode());
-			Set<DetailsRecipeIngredients> details = new HashSet<DetailsRecipeIngredients>(listDetails);
-			recipe.setDetailsRecipeIngredients(details);
-		}
 		return listRecipes;
 	}
 	
 	@Transactional
 	public void delete (Integer code) {
-		detailsService.deleteDetailsIngredients(code);
 		dao.deleteRecipe(code);
 	}
 	
@@ -118,6 +96,7 @@ public class RecipeService {
 		newRecipe.setCategory(recipe.getCategory());
 		newRecipe.setType(recipe.getType());
 		newRecipe.setPrepareType(recipe.getPrepareType());
+		newRecipe.setIngredients(recipe.getIngredients());
 	}
 
 	public Recipe fromDTOupdate (RecipeDTO recipeDto) {
@@ -126,7 +105,7 @@ public class RecipeService {
 		recipe.setType(typeService.find(recipeDto.getCodeType()));
 		recipe.setPrepareType(prepareTypeService.find(recipeDto.getCodePrepareType()));
 		return new Recipe(recipeDto.getCode(), recipeDto.getName(), recipeDto.getTested(), recipeDto.getMethodOfPreparation(), 
-				recipeDto.getPreparationTime(), recipeDto.getComments(), recipe.getCategory(), 
+				recipeDto.getPreparationTime(), recipeDto.getIngredients(), recipeDto.getComments(), recipe.getCategory(), 
 				recipe.getType(), recipe.getPrepareType(), recipeDto.getFavorite());
 	}
 	

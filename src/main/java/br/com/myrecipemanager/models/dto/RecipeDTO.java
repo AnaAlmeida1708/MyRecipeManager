@@ -17,6 +17,7 @@ public class RecipeDTO implements Serializable{
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String methodOfPreparation;
 	private String preparationTime;
+	private String ingredients;
 	private String comments;
 	private Boolean favorite;
 	
@@ -35,6 +36,7 @@ public class RecipeDTO implements Serializable{
 		preparationTime = recipe.getPreparationTime();
 		comments = recipe.getComments();
 		favorite = recipe.getFavorite();
+		ingredients = recipe.getIngredients();
 	}
 
 	public Integer getCode() {
@@ -116,6 +118,13 @@ public class RecipeDTO implements Serializable{
 	public void setCodePrepareType(Integer codePrepareType) {
 		this.codePrepareType = codePrepareType;
 	}
-	
+
+	public String getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(String ingredients) {
+		this.ingredients = ingredients;
+	}
 
 }
